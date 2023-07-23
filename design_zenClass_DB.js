@@ -173,91 +173,16 @@ db.User_DB.aggregate([
 
 
 
-// db.Attendance_DB.aggregate([
-//   {
-//     $lookup: {
-//       from: "Topics_DB",
-//       localField: "topic_id",
-//       foreignField: "topic_id",
-//       as: "Topic",
-//     },
-//   },
-//   {
-//     $lookup: {
-//       from: "Task_DB",
-//       localField: "topic_id",
-//       foreignField: "topic_id",
-//       as: "Task",
-//     },
-//   },
-//   {
-//     $match: {
-//       $and: [{ attendance: false }, { "Task.submit": false }],
-//     },
-//   },
-//   {
-//     $match: {
-//       $and: [
-//         {
-//           $and: [
-//             { "Topic.topic_Date": { $gt: new Date("2020-10-15") } },
-//             { "Topic.topic_Date": { $lt: new Date("2020-10-31") } },
-//           ],
-//         },
-//         {
-//           $and: [
-//             { "Task.task_date": { $gt: new Date("2020-10-15") } },
-//             { "Task.task_date": { $lt: new Date("2020-10-31") } },
-//           ],
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     $count: "absent & task not submitted student",
-//   },
-// ]);
 
 
-// db.Attendance_DB.aggregate([
 
-//   {
-//     $lookup: {
-//       from: "Task_DB",
-//       localField: "topicId",
-//       foreignField: "topicId",
-//       as: "TASK",
-//     },
-//   },
-//   {
-//     $match: {
-//       $and: [{ attendance: false }, { "TASK.submit": false }],
-//     },
-//   },
-//   {
-//     $match: {
-//       $and: [
-//         // {
-//         //   $and: [
-//         //     { "topicInfo.topicDate": { $gt: new Date("30-sep-2020") } },
-//         //     { "topicInfo.topicDate": { $lt: new Date("01-nov-2020") } },
-//         //   ],
-//         // },
-//         {
-//           $and: [
-//             { "TASK.task_date": { $gt: new Date("2020-10-15") } },
-//             { "TASK.task_date": { $lt: new Date("2020-10-31") } },
-//           ],
-//         },
-//       ]
-//     },
-//   },
-//   {
-//     $count: "absent & task not submitted student",
-//     _id:0,
-//    " TASK.task":1,
-//   },
-// ]);
+
+
+
+
+
+
+
 
 
 
