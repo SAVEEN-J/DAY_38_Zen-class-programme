@@ -145,6 +145,49 @@ db.User_DB.aggregate([
 // 6 Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
 
 
+  db.User_DB.aggregate([
+    {
+      $lookup:{
+        from:"Attendance_DB",
+        localField:"user_id",
+        foreignField:"user_id",
+        as: "absent"
+      },
+    
+    },
+      {
+    $lookup:{
+    from:"Task_DB",
+        localField:"user_id",
+        foreignField:"user_id",
+        as: "inCompletTask"
+    
+    },
+    },
+    {
+      $project:{
+    _id:0,
+    user_name:1,
+    user_id:1,
+    "absent.attendance":1,
+    "inCompletTask":1
+    
+    },
+    },{
+    $match:{
+    $and:[
+      { "absent.attendance":false},
+      { "inCompletTask.submit":false},
+      { "inCompletTask.task_date": { $gte: new Date("2020-10-15") } },
+      { "inCompletTask.task_date": { $lte: new Date("2020-10-31") } },
+
+    
+    ]
+    
+    },
+    },
+    
+    ])
 
 
 
@@ -162,6 +205,39 @@ db.User_DB.aggregate([
 
 
 
+
+
+
+
+
+
+    // db.User_DB.aggregate([
+    //   {
+    //       $lookup: {
+    //           from: "user_task_1",
+    //           let: {
+    //               "userId": "$user_id"
+    //           },
+    //           pipeline: [
+    //               {
+    //                   $match: {
+    //                        submit: false,
+    //                       $and:[{$expr: {$eq: ["$user_id", "$$userId"] }   }]  
+    //                   }
+              
+    //               }
+    
+    //           ],
+    
+    //           as: "result"
+    
+    //       }
+    //   },
+    //   {
+    //      $match:{ result:{$ne:[]} } 
+    //   }
+     
+    // ])
 
 
 
